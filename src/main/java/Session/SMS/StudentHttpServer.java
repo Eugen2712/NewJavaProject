@@ -111,8 +111,19 @@ public class StudentHttpServer {
             int age = jsonNode.get("age").asInt();
             Major major = Major.valueOf(jsonNode.get("major").asText());
             String email = jsonNode.get("email").asText();
-
-            Student student = new UndergradStudent(id, firstName, lastName, age, major, email);
+            Student student = null;
+            if (jsonNode.has("gpa")) {
+                double gpa = jsonNode.get("gpa").asDouble();
+                 student = new GraduateStudent(id, firstName, lastName, age, major, email);
+                try {
+                    ((GraduateStudent) student).setGPA(gpa);
+                } catch (IllegalGpaException e) {
+                    exchange.sendResponseHeaders(400, -1);
+                    return "{\"error\": \"Invalid GPA\"}";
+                }
+            } else {
+                 student = new UndergradStudent(id, firstName, lastName, age, major, email);
+            }
             studentService.addStudent(student);
             studentService.saveStudents();
             return objectMapper.writeValueAsString(student);
