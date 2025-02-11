@@ -101,7 +101,8 @@ public class StudentHandler implements HttpHandler {
         String requestBody = new String(exchange.getRequestBody().readAllBytes());
         JsonNode jsonNode = objectMapper.readTree(requestBody);
 
-        int id = jsonNode.get("id").asInt();
+        //int id = jsonNode.get("id").asInt();
+        int id = studentService.getStudents().size() + 1;
         String firstName = jsonNode.get("firstName").asText();
         String lastName = jsonNode.get("lastName").asText();
         int age = jsonNode.get("age").asInt();
