@@ -24,6 +24,7 @@ public class StudentHttpServer {
         HttpServer server = HttpServer.create(new InetSocketAddress(PORT), 0);
         server.createContext("/students", new StudentHandler(studentService));
         server.createContext("/graduate", new GraduateHandler(studentService));
+        server.createContext("/auth", new AuthHandler());
         server.setExecutor(null);
         server.start();
         System.out.println("Server started on port " + PORT);
