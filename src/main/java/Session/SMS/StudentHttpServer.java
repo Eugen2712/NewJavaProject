@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 
 public class StudentHttpServer {
-    private static final int PORT = 8083;
+    private static final int PORT = 8080;
     private StudentService studentService;
 
     public StudentHttpServer(StudentService studentService) {

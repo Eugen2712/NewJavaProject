@@ -64,7 +64,7 @@ public class StudentHandler implements HttpHandler {
     private String handleGet(HttpExchange exchange) throws IOException {
         String query = exchange.getRequestURI().getQuery();
         int page = 0;
-        int size = 5;
+        int size = 10;
         if (query != null) {
             String[] queryParam = query.split("&");
             for (String param : queryParam) {
